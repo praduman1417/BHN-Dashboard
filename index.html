@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<title>Exeption Queue Dashboard</title>
+    <link rel="icon" href="favicon.ico">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Custom styles for this template -->
+	<link href="css/dashboard.css" rel="stylesheet">
+<script src="js/Chart.min.js"></script>
+<!--script src="http://cdn.jsdelivr.net/chart.js/1.0.1-beta.4/Chart.min.js"-->
+<script src="js/bootstrap.min.js"></script>
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="js/ie-emulation-modes-warning.js"></script>
+	
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+     
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Exception Queue</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+       
+		   <li class="active"><a href="#">Dashboard--jenkins build </a></li>
+		   <li class="divider"></li>
+		  
+            <li><a href="charts.html">Charts</a></li>
+            <li><a href="tables.html">Tables</a></li>
+			<li><a href="autodata.html">Automated Data</a></li>
+			
+            <li><a href="help.html">Help</a></li>
+          </ul>
+          <!--form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search">
+          </form-->
+        </div>
+      </div>
+    </nav>
+
+   <div class="container-fluid">
+      <div class="row">
+		<!--div class="col-md-2 col-sm-2 nav navbar-sidebar" id="nav_horizontal" align="left" >
+			  <h3> About This Page</h3>
+			  <p>This page give the graphical representattion
+				  of how the exceptions are resolved </p>
+		</div-->
+		<div class="main">
+          <h2 align="center">Execption Resolved Today</h2>
+          <h2 align="center">Testing</h2>
+
+		  <br><br>
+		 </div>
+	  </div>
+         
+	 <div class="row">
+			
+			<div class="col-md-4 col-sm-6 col-md-offset-1" align="center">
+          			
+              <canvas id="daily" width="400px" height="300px"></canvas>
+			  <h3 align="center">Bar chart</h3>
+			  <p>The graph is showing the no of exeptions resolved today'</p>
+			</div>
+			<div class="col-md-1 col-sm-6" align="center">
+          		<br>	
+              <h3 class="colorcod" style="font-size:small;color:white;margin: auto;background: #4ACAB4">E201 </h3>
+			  <h3 class="colorcod" style="font-size:small;color:white;margin: auto;background: #FF8153">E202 </h3>
+			  <h3 class="colorcod" style="font-size:small;color:white;margin: auto;background: #FFEA88">E203</h3>
+			    <br><br>
+			</div>
+			
+			<div class="col-md-3 col-sm-6" align="left">
+			 	  
+              <canvas id="pidaily"  width="400px" height="389px"></canvas>
+			   <h3 align="center">Pie chart</h3>
+				<p>The graph is showing the no of exeptions resolved today</p>
+		  	
+			</div>
+		  </div>
+	</div>
+	
+	<script>
+	var today = {
+    labels: [""],
+    datasets: [
+        {
+            label: "Exception-201",
+             fillColor: "#4ACAB4",
+            strokeColor: "rgba(220,220,220,0.8)",
+            highlightFill: "rgba(220,220,220,0.75)",
+            highlightStroke: "rgba(220,220,220,1)",
+            data: [30]
+        },
+        {
+            label: "Exception-202",
+            fillColor: "#FF8153",
+            strokeColor: "rgba(220,220,220,0.8)",
+            highlightFill: "rgba(220,220,220,0.75)",
+            highlightStroke: "rgba(220,220,220,1)",
+            data: [55]
+        },
+		 {
+            label: "Exception-203",
+            fillColor: "#FFEA88",
+            strokeColor: "rgba(220,220,220,0.8)",
+            highlightFill: "rgba(220,220,220,0.75)",
+            highlightStroke: "rgba(220,220,220,1)",
+            data: [15]
+        }
+    ]
+};
+var options = {
+	scaleBeginAtZero : true,
+	responsive :true
+}
+    var daily = document.getElementById("daily").getContext("2d");
+    new Chart(daily).Bar(today,options);
+	
+	</script>
+	<script>
+	  var pieData = [
+  	{
+		value : 30,
+		color : "#4ACAB4",
+		label: "Exception Code-201"
+	},
+	{
+		value : 55,
+		color : "#FF8153",
+		label: "Exception Code-202"
+	},
+	{
+		value : 15,
+		color : "#FFEA88",
+		label: "Exception Code-203"
+	}
+];
+var pieOptions = {
+	segmentShowStroke : false,
+	animateScale : false,
+	animateRotate: true,
+	responsive :true
+}
+var pidaily= document.getElementById("pidaily").getContext("2d");
+new Chart(pidaily).Pie(pieData, pieOptions);
+	</script>
+  </body>
+</html>
